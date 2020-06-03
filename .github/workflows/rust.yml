@@ -1,0 +1,32 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: "*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: rust-mdbook
+      uses: ryankurte/action-mdbook@0.1.1
+      with:
+        # mdbook output directory
+        outputDir: docs
+    
+    - name: Git Commit and Push
+      uses: github-actions-x/commit@v2.6
+      with:
+        # Github Token with commit access
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        # Specify commit message
+        commit-message: Update mdbook
+        files: docs
+    
