@@ -18,7 +18,7 @@ jobs:
     - name: rust-mdbook
       uses: ryankurte/action-mdbook@0.1.1
       with:
-        # mdbook output directory
+        inputDir: src
         outputDir: docs
     
     - name: Git Commit and Push
