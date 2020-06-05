@@ -29,4 +29,4 @@ jobs:
         # Specify commit message
         commit-message: Update mdbook
         files: docs
-    
+        rebase: true
