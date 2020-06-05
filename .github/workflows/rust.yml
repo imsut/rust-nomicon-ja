@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: rust-mdbook
       uses: ryankurte/action-mdbook@0.1.1
       with:
-        inputDir: src
         outputDir: docs
     
     - name: Git Commit and Push
