@@ -3,8 +3,6 @@ name: Rust
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: "*"
 
 env:
   CARGO_TERM_COLOR: always
@@ -19,9 +17,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-
-    - name: Guard
-      run: |
 
     - name: rust-mdbook
       uses: ryankurte/action-mdbook@0.1.1
@@ -40,6 +35,6 @@ jobs:
           git add docs
           git commit -m "Automated docs update"
           git fetch
-          git merge origin/ken-test
-          git push origin HEAD:ken-test
+          git merge origin/master
+          git push origin master
         fi
