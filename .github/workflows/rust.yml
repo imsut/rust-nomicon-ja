@@ -1,0 +1,35 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: "*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: rust-mdbook
+      uses: ryankurte/action-mdbook@0.1.1
+      with:
+        outputDir: docs
+    
+    - name: Git Commit docs
+      run: |
+        git config --global user.name 'Your Name'
+        git config --global user.email 'your-username@users.noreply.github.com'
+        git add .
+        git commit -m "Automated docs update"
+        git fetch
+        git merge origin/ken-test
+        git push origin HEAD:ken-test
