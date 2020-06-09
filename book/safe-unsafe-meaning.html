@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>安全と危険の相互作用</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">はじめにabc</a></li><li class="chapter-item expanded "><a href="meet-safe-and-unsafe.html"><strong aria-hidden="true">1.</strong> 安全と危険のご紹介</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safe-unsafe-meaning.html" class="active"><strong aria-hidden="true">1.1.</strong> 安全と危険の相互作用</a></li><li class="chapter-item expanded "><a href="working-with-unsafe.html"><strong aria-hidden="true">1.2.</strong> Unsafe と連携する</a></li></ol></li><li class="chapter-item expanded "><a href="data.html"><strong aria-hidden="true">2.</strong> データレイアウト</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repr-rust.html"><strong aria-hidden="true">2.1.</strong> repr(Rust)</a></li><li class="chapter-item expanded "><a href="exotic-sizes.html"><strong aria-hidden="true">2.2.</strong> 奇妙なサイズの型</a></li><li class="chapter-item expanded "><a href="other-reprs.html"><strong aria-hidden="true">2.3.</strong> 代替メモリレイアウト</a></li></ol></li><li class="chapter-item expanded "><a href="ownership.html"><strong aria-hidden="true">3.</strong> 所有権とライフタイム</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">3.1.</strong> リファレンス</a></li><li class="chapter-item expanded "><a href="lifetimes.html"><strong aria-hidden="true">3.2.</strong> ライフタイム</a></li><li class="chapter-item expanded "><a href="lifetime-mismatch.html"><strong aria-hidden="true">3.3.</strong> ライフタイムシステムの限界</a></li><li class="chapter-item expanded "><a href="lifetime-elision.html"><strong aria-hidden="true">3.4.</strong> ライフタイムの省略</a></li><li class="chapter-item expanded "><a href="unbounded-lifetimes.html"><strong aria-hidden="true">3.5.</strong> 無制限のライフタイム</a></li><li class="chapter-item expanded "><a href="hrtb.html"><strong aria-hidden="true">3.6.</strong> 高階トレイト境界</a></li><li class="chapter-item expanded "><a href="subtyping.html"><strong aria-hidden="true">3.7.</strong> Subtyping and Variance</a></li><li class="chapter-item expanded "><a href="dropck.html"><strong aria-hidden="true">3.8.</strong> Drop Check</a></li><li class="chapter-item expanded "><a href="phantom-data.html"><strong aria-hidden="true">3.9.</strong> PhantomData</a></li><li class="chapter-item expanded "><a href="borrow-splitting.html"><strong aria-hidden="true">3.10.</strong> Splitting Borrows</a></li></ol></li><li class="chapter-item expanded "><a href="conversions.html"><strong aria-hidden="true">4.</strong> Type Conversions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coercions.html"><strong aria-hidden="true">4.1.</strong> Coercions</a></li><li class="chapter-item expanded "><a href="dot-operator.html"><strong aria-hidden="true">4.2.</strong> The Dot Operator</a></li><li class="chapter-item expanded "><a href="casts.html"><strong aria-hidden="true">4.3.</strong> Casts</a></li><li class="chapter-item expanded "><a href="transmutes.html"><strong aria-hidden="true">4.4.</strong> Transmutes</a></li></ol></li><li class="chapter-item expanded "><a href="uninitialized.html"><strong aria-hidden="true">5.</strong> Uninitialized Memory</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="checked-uninit.html"><strong aria-hidden="true">5.1.</strong> Checked</a></li><li class="chapter-item expanded "><a href="drop-flags.html"><strong aria-hidden="true">5.2.</strong> Drop Flags</a></li><li class="chapter-item expanded "><a href="unchecked-uninit.html"><strong aria-hidden="true">5.3.</strong> Unchecked</a></li></ol></li><li class="chapter-item expanded "><a href="obrm.html"><strong aria-hidden="true">6.</strong> 所有権に基づいたリソース管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="constructors.html"><strong aria-hidden="true">6.1.</strong> Constructors</a></li><li class="chapter-item expanded "><a href="destructors.html"><strong aria-hidden="true">6.2.</strong> Destructors</a></li><li class="chapter-item expanded "><a href="leaking.html"><strong aria-hidden="true">6.3.</strong> Leaking</a></li></ol></li><li class="chapter-item expanded "><a href="unwinding.html"><strong aria-hidden="true">7.</strong> Unwinding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exception-safety.html"><strong aria-hidden="true">7.1.</strong> 例外安全性</a></li><li class="chapter-item expanded "><a href="poisoning.html"><strong aria-hidden="true">7.2.</strong> Poisoning</a></li></ol></li><li class="chapter-item expanded "><a href="concurrency.html"><strong aria-hidden="true">8.</strong> Concurrency</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="races.html"><strong aria-hidden="true">8.1.</strong> Races</a></li><li class="chapter-item expanded "><a href="send-and-sync.html"><strong aria-hidden="true">8.2.</strong> Send and Sync</a></li><li class="chapter-item expanded "><a href="atomics.html"><strong aria-hidden="true">8.3.</strong> Atomics</a></li></ol></li><li class="chapter-item expanded "><a href="vec.html"><strong aria-hidden="true">9.</strong> Implementing Vec</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="vec-layout.html"><strong aria-hidden="true">9.1.</strong> Layout</a></li><li class="chapter-item expanded "><a href="vec-alloc.html"><strong aria-hidden="true">9.2.</strong> Allocating</a></li><li class="chapter-item expanded "><a href="vec-push-pop.html"><strong aria-hidden="true">9.3.</strong> Push and Pop</a></li><li class="chapter-item expanded "><a href="vec-dealloc.html"><strong aria-hidden="true">9.4.</strong> Deallocating</a></li><li class="chapter-item expanded "><a href="vec-deref.html"><strong aria-hidden="true">9.5.</strong> Deref</a></li><li class="chapter-item expanded "><a href="vec-insert-remove.html"><strong aria-hidden="true">9.6.</strong> Insert and Remove</a></li><li class="chapter-item expanded "><a href="vec-into-iter.html"><strong aria-hidden="true">9.7.</strong> IntoIter</a></li><li class="chapter-item expanded "><a href="vec-raw.html"><strong aria-hidden="true">9.8.</strong> RawVec</a></li><li class="chapter-item expanded "><a href="vec-drain.html"><strong aria-hidden="true">9.9.</strong> Drain</a></li><li class="chapter-item expanded "><a href="vec-zsts.html"><strong aria-hidden="true">9.10.</strong> Handling Zero-Sized Types</a></li><li class="chapter-item expanded "><a href="vec-final.html"><strong aria-hidden="true">9.11.</strong> Final Code</a></li></ol></li><li class="chapter-item expanded "><a href="arc-and-mutex.html"><strong aria-hidden="true">10.</strong> Implementing Arc and Mutex</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- # How Safe and Unsafe Interact -->
+<h1><a class="header" href="#安全と危険の相互作用" id="安全と危険の相互作用">安全と危険の相互作用</a></h1>
+<!-- What's the relationship between Safe Rust and Unsafe Rust? How do they
+interact? -->
+<p>安全な Rust とアンセーフな Rust とはどう関係しているのでしょうか? どのように影響し合うのでしょうか?</p>
+<!-- The separation between Safe Rust and Unsafe Rust is controlled with the
+`unsafe` keyword, which acts as an interface from one to the other. This is
+why we can say Safe Rust is a safe language: all the unsafe parts are kept
+exclusively behind the boundary. -->
+<p><code>unsafe</code> キーワードがインターフェースとなり、安全な Rust とアンセーフな Rust とを分離します。
+このため、安全な Rust は安全な言語で、アンセーフな部分は完全に境界外に管理されている、と言うことができるのです。</p>
+<!--
+The `unsafe` keyword has two uses: to declare the existence of contracts the
+compiler can't check, and to declare that the adherence of some code to
+those contracts has been checked by the programmer.
+-->
+<p><code>unsafe</code> は 2 つの目的に使われます。コンパイラがチェックできない契約が存在する事を宣言することと、
+コードが契約に準拠していることがプログラマによってチェックされた事を宣言する事です。</p>
+<!--
+You can use `unsafe` to indicate the existence of unchecked contracts on
+_functions_ and on _trait declarations_. On functions, `unsafe` means that
+users of the function must check that function's documentation to ensure
+they are using it in a way that maintains the contracts the function
+requires. On trait declarations, `unsafe` means that implementors of the
+trait must check the trait documentation to ensure their implementation
+maintains the contracts the trait requires.
+-->
+<p><em>関数</em> と <em>トレイトの宣言</em> に未チェックな契約が存在する事を、<code>unsafe</code> を使って示すことができます。
+関数に <code>unsafe</code> を使うと、ドキュメントを読んで、
+要求された契約を守るように関数を使うことを、その関数のユーザーに要請することになります。
+トレイトの宣言に <code>unsafe</code> を使うと、そのトレイトを実装するユーザーに対し、ドキュメントをチェックして契約を守るよう要請します。</p>
+<!--
+You can use `unsafe` on a block to declare that all constraints required
+by an unsafe function within the block have been adhered to, and the code
+can therefore be trusted. You can use `unsafe` on a trait implementation
+to declare that the implementation of that trait has adhered to whatever
+contracts the trait's documentation requires.
+-->
+<p>コードブロックに使われた <code>unsafe</code> は、そのブロックで呼ばれているアンセーフな関数が要求する契約は守られていて、コードが信頼出来る事を意味します。<code>unsafe</code> をトレイトの実装に使うと、その実装がトレイトのドキュメントに書かれている契約に準拠している事を示します。</p>
+<!--
+The standard library has a number of unsafe functions, including:
+-->
+<p>標準ライブラリにはいくつものアンセーフな関数があります。例えば、</p>
+<!--
+* `slice::get_unchecked`, which performs unchecked indexing, allowing
+  memory safety to be freely violated.
+* `mem::transmute` reinterprets some value as having a given type, bypassing
+  type safety in arbitrary ways (see [conversions] for details).
+* Every raw pointer to a sized type has an intrinstic `offset` method that
+  invokes Undefined Behavior if the passed offset is not "in bounds" as
+  defined by LLVM.
+* All FFI functions are `unsafe` because the other language can do arbitrary
+  operations that the Rust compiler can't check.
+-->
+<ul>
+<li><code>slice::get_unchecked</code> は未チェックのインデックス参照を実行します。自由自在にメモリ安全性に違反できます。</li>
+<li><code>mem::transmute</code> は、型安全の仕組みを好きなようにすり抜けて、ある値が特定の型であると再解釈します（詳細は <a href="conversions.html">変換</a> をみてください）。</li>
+<li>サイズが確定している型の生ポインタには、固有の <code>offset</code> メソッドがあります。渡されたオフセットが LLVM が定める &quot;境界内&quot; になければ、未定義の挙動を引き起こします。</li>
+<li>すべての FFI 関数は <code>unsafe</code> です。なぜなら Rust コンパイラは、他の言語が実行するどんな操作もチェックできないからです。</li>
+</ul>
+<!--
+As of Rust 1.0 there are exactly two unsafe traits:
+-->
+<p>Rust 1.0 現在、アンセーフなトレイトは 2 つしかありません。</p>
+<!--
+* `Send` is a marker trait (a trait with no API) that promises implementors are
+  safe to send (move) to another thread.
+* `Sync` is a marker trait that promises threads can safely share implementors
+  through a shared reference.
+  -->
+<ul>
+<li><code>Send</code> は API を持たないマーカートレイトで、実装された型が他のスレッドに安全に送れる（ムーブできる）ことを約束します。</li>
+<li><code>Sync</code> もマーカートレイトで、このトレイトを実装した型は、共有された参照を使って安全に複数のスレッドで共有できる事を約束します。</li>
+</ul>
+<!--
+Much of the Rust standard library also uses Unsafe Rust internally, although
+these implementations are rigorously manually checked, and the Safe Rust
+interfaces provided on top of these implementations can be assumed to be safe.
+-->
+<p>また、多くの Rust 標準ライブラリは内部でアンセーフな Rust を使っています。ただ、標準ライブラリの
+実装はプログラマが徹底的にチェックしているので、アンセーフな Rust の上に実装された安全な Rust は安全であると仮定して良いでしょう。</p>
+<!--
+The need for all of this separation boils down a single fundamental property
+of Safe Rust:
+
+**No matter what, Safe Rust can't cause Undefined Behavior.**
+-->
+<p>このように分離する目的は、結局のところ、安全な Rust のたった一つの基本的な性質にあります。</p>
+<p><strong>どうやっても、安全な Rust では未定義な挙動を起こせない。</strong></p>
+<!--
+The design of the safe/unsafe split means that Safe Rust inherently has to
+trust that any Unsafe Rust it touches has been written correctly (meaning
+the Unsafe Rust actually maintains whatever contracts it is supposed to
+maintain). On the other hand, Unsafe Rust has to be very careful about
+trusting Safe Rust.
+-->
+<p>このように安全とアンセーフを分けると、安全な Rust は、自分が利用するアンセーフな Rust が正しく書かれている事、
+つまりアンセーフな Rust がそれが守るべき契約を実際に守っている事、を本質的に信頼しなくてはいけません。
+逆に、アンセーフな Rust は安全な Rust を注意して信頼しなくてはいけません。</p>
+<!--
+As an example, Rust has the `PartialOrd` and `Ord` traits to differentiate
+between types which can "just" be compared, and those that provide a total
+ordering (where every value of the type is either equal to, greater than,
+or less than any other value of the same type). The sorted map type
+`BTreeMap` doesn't make sense for partially-ordered types, and so it
+requires that any key type for it implements the `Ord` trait. However,
+`BTreeMap` has Unsafe Rust code inside of its implementation, and this
+Unsafe Rust code cannot assume that any `Ord` implementation it gets makes
+sense. The unsafe portions of `BTreeMap`'s internals have to be careful to
+maintain all necessary contracts, even if a key type's `Ord` implementation
+does not implement a total ordering.
+-->
+<p>例えば、Rust には <code>PartialOrd</code>トレイトと <code>Ord</code>トレイトがあり、単に比較可能な型と全順序が
+定義されている型（任意の値が同じ型の他の値と比べて等しいか、大きいか、小さい）とを区別します。
+順序つきマップの <code>BTreeMap</code> は半順序の型には使えないので、キーとして使われる型が <code>Ord</code>トレイトを
+実装している事を要求します。
+しかし <code>BTreeMap</code> の実装ではアンセーフな Rust が使われていて、アンセーフな Rust は渡された <code>Ord</code> の実装が
+適切であるとは仮定できません。
+<code>BTreeMap</code> 内部のアンセーフな部分は、キー型の <code>Ord</code> の実装が全順序ではない場合でも、必要な契約が
+すべて守られるよう注意深く書かれなくてはいけません。</p>
+<!--
+Unsafe Rust cannot automatically trust Safe Rust. When writing Unsafe Rust,
+you must be careful to only rely on specific Safe Rust code, and not make
+assumptions about potential future Safe Rust code providing the same
+guarantees.
+-->
+<p>アンセーフな Rust は安全な Rust を無意識には信頼できません。アンセーフな Rust コードを書くときには、
+安全な Rust の特定のコードのみに依存する必要があり、
+安全な Rust が将来にわたって同様の安全性を提供すると仮定してはいけません。</p>
+<!--
+This is the problem that `unsafe` traits exist to resolve. The `BTreeMap`
+type could theoretically require that keys implement a new trait called
+`UnsafeOrd`, rather than `Ord`, that might look like this:
+-->
+<p>この問題を解決するために <code>unsafe</code> なトレイトが存在します。理論上は、<code>BTreeMap</code> 型は
+キーが <code>Ord</code> ではなく、新しいトレイト<code>UnsafeOrd</code> を実装する事を要求する事ができます。
+このようなコードになるでしょう。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>use std::cmp::Ordering;
+
+unsafe trait UnsafeOrd {
+    fn cmp(&amp;self, other: &amp;Self) -&gt; Ordering;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+Then, a type would use `unsafe` to implement `UnsafeOrd`, indicating that
+they've ensured their implementation maintains whatever contracts the
+trait expects. In this situation, the Unsafe Rust in the internals of
+`BTreeMap` could trust that the key type's `UnsafeOrd` implementation is
+correct. If it isn't, it's the fault of the unsafe trait implementation
+code, which is consistent with Rust's safety guarantees.
+-->
+<p>この場合、<code>UnsafeOrd</code> を実装する型は、このトレイトが期待する契約に準拠している事を示すために
+<code>unsafe</code> キーワードを使うことになります。
+この状況では、<code>BTreeMap</code> 内部のアンセーフな Rust は、キー型が <code>UnsafeOrd</code> を正しく実装していると
+信用する事ができます。もしそうで無ければ、それはトレイトの実装の問題であり、
+これは Rust の安全性の保証と一致しています。</p>
+<!--
+The decision of whether to mark a trait `unsafe` is an API design choice.
+Rust has traditionally avoided marking traits unsafe because it makes Unsafe
+Rust pervasive, which is not desirable. `Send` and `Sync` are marked unsafe
+because thread safety is a *fundamental property* that unsafe code can't
+possibly hope to defend against in the way it could defend against a bad
+`Ord` implementation. The decision of whether to mark your own traits `unsafe`
+depends on the same sort of consideration. If `unsafe` code cannot reasonably
+expect to defend against a bad implementation of the trait, then marking the
+trait `unsafe` is a reasonable choice.
+-->
+<p>トレイトに <code>unsafe</code> をつけるかどうかは API デザインにおける選択です。
+Rust では従来 <code>unsafe</code> なトレイトを避けてきました。そうしないとアンセーフな Rust が
+蔓延してしまい、好ましくないからです。
+<code>Send</code> と <code>Sync</code> が <code>unsafe</code> となっているのは、スレッドの安全性が <em>基本的な性質</em> であり、
+間違った <code>Ord</code> の実装に対して危険なコードが防衛できるのと同様の意味では防衛できないからです。
+あなたが宣言したトレイトを <code>unsafe</code> とマークするかどうかも、同じようにじっくりと考えてください。
+もし <code>unsafe</code> なコードがそのトレイトの間違った実装から防御することが合理的に不可能であるなら、
+そのトレイトを <code>unsafe</code> とするのは合理的な選択です。</p>
+<!--
+As an aside, while `Send` and `Sync` are `unsafe` traits, they are
+automatically implemented for types when such derivations are provably safe
+to do. `Send` is automatically derived for all types composed only of values
+whose types also implement `Send`. `Sync` is automatically derived for all
+types composed only of values whose types also implement `Sync`.
+-->
+<p>余談ですが、<code>unsafe</code> なトレイトである <code>Send</code> と <code>Sync</code> は、それらを実装する事が安全だと
+実証可能な場合には自動的に実装されます。
+<code>Send</code> は、<code>Send</code> を実装した型だけから構成される型に対して、自動的に実装されます。
+<code>Sync</code> は、<code>Sync</code> を実装した型だけから構成される型に対して、自動的に実装されます。</p>
+<!--
+This is the dance of Safe Rust and Unsafe Rust. It is designed to make using
+Safe Rust as ergonomic as possible, but requires extra effort and care when
+writing Unsafe Rust. The rest of the book is largely a discussion of the sort
+of care that must be taken, and what contracts it is expected of Unsafe Rust
+to uphold.
+-->
+<p>これが安全な Rust とアンセーフな Rust のダンスです。
+これは、安全な Rust をできるだけ快適に使えるように、しかしアンセーフな Rust を書くには
+それ以上の努力と注意深さが要求されるようなデザインになっています。
+この本の残りでは、どういう点に注意しなくはいけないのか、
+アンセーフな Rust を維持するための契約とは何なのかを議論します。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="meet-safe-and-unsafe.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="working-with-unsafe.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="meet-safe-and-unsafe.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="working-with-unsafe.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
