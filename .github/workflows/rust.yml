@@ -1,0 +1,40 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: rust-mdbook
+      uses: ryankurte/action-mdbook@0.1.1
+
+    - name: Rename
+      run: |
+        rm -rf docs
+        mv book docs
+    
+    - name: Git Commit docs
+      run: |
+        committer=$(git show -s --format='%ae')
+        if [ $committer != "rust-lang-ja.nomicon-admin@users.noreply.github.com" ]; then
+          git config --global user.name 'Document updater'
+          git config --global user.email 'rust-lang-ja.nomicon-admin@users.noreply.github.com'
+          git add docs
+          git commit -m "Automated docs update"
+          git fetch
+          git merge origin/master
+          git push origin master
+        fi
