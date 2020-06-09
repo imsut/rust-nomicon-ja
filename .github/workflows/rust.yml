@@ -15,21 +15,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         fetch-depth: 0
 
     - name: rust-mdbook
       uses: ryankurte/action-mdbook@0.1.1
-      with:
-        outputDir: docs
+
+    - name: Rename
+      run: |
+        rm -rf docs
+        mv book docs
     
     - name: Git Commit docs
       run: |
-        git config --global user.name 'Your Name'
-        git config --global user.email 'your-username@users.noreply.github.com'
+        git config --global user.name 'Document updater'
+        git config --global user.email 'rust-lang-ja.nomicon-admin@users.noreply.github.com'
         git add .
         git commit -m "Automated docs update"
-        git fetch
-        git merge origin/ken-test
         git push origin HEAD:ken-test
