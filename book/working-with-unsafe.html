@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Unsafe と連携する</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">はじめにabc</a></li><li class="chapter-item expanded "><a href="meet-safe-and-unsafe.html"><strong aria-hidden="true">1.</strong> 安全と危険のご紹介</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safe-unsafe-meaning.html"><strong aria-hidden="true">1.1.</strong> 安全と危険の相互作用</a></li><li class="chapter-item expanded "><a href="working-with-unsafe.html" class="active"><strong aria-hidden="true">1.2.</strong> Unsafe と連携する</a></li></ol></li><li class="chapter-item expanded "><a href="data.html"><strong aria-hidden="true">2.</strong> データレイアウト</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="repr-rust.html"><strong aria-hidden="true">2.1.</strong> repr(Rust)</a></li><li class="chapter-item expanded "><a href="exotic-sizes.html"><strong aria-hidden="true">2.2.</strong> 奇妙なサイズの型</a></li><li class="chapter-item expanded "><a href="other-reprs.html"><strong aria-hidden="true">2.3.</strong> 代替メモリレイアウト</a></li></ol></li><li class="chapter-item expanded "><a href="ownership.html"><strong aria-hidden="true">3.</strong> 所有権とライフタイム</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">3.1.</strong> リファレンス</a></li><li class="chapter-item expanded "><a href="lifetimes.html"><strong aria-hidden="true">3.2.</strong> ライフタイム</a></li><li class="chapter-item expanded "><a href="lifetime-mismatch.html"><strong aria-hidden="true">3.3.</strong> ライフタイムシステムの限界</a></li><li class="chapter-item expanded "><a href="lifetime-elision.html"><strong aria-hidden="true">3.4.</strong> ライフタイムの省略</a></li><li class="chapter-item expanded "><a href="unbounded-lifetimes.html"><strong aria-hidden="true">3.5.</strong> 無制限のライフタイム</a></li><li class="chapter-item expanded "><a href="hrtb.html"><strong aria-hidden="true">3.6.</strong> 高階トレイト境界</a></li><li class="chapter-item expanded "><a href="subtyping.html"><strong aria-hidden="true">3.7.</strong> Subtyping and Variance</a></li><li class="chapter-item expanded "><a href="dropck.html"><strong aria-hidden="true">3.8.</strong> Drop Check</a></li><li class="chapter-item expanded "><a href="phantom-data.html"><strong aria-hidden="true">3.9.</strong> PhantomData</a></li><li class="chapter-item expanded "><a href="borrow-splitting.html"><strong aria-hidden="true">3.10.</strong> Splitting Borrows</a></li></ol></li><li class="chapter-item expanded "><a href="conversions.html"><strong aria-hidden="true">4.</strong> Type Conversions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coercions.html"><strong aria-hidden="true">4.1.</strong> Coercions</a></li><li class="chapter-item expanded "><a href="dot-operator.html"><strong aria-hidden="true">4.2.</strong> The Dot Operator</a></li><li class="chapter-item expanded "><a href="casts.html"><strong aria-hidden="true">4.3.</strong> Casts</a></li><li class="chapter-item expanded "><a href="transmutes.html"><strong aria-hidden="true">4.4.</strong> Transmutes</a></li></ol></li><li class="chapter-item expanded "><a href="uninitialized.html"><strong aria-hidden="true">5.</strong> Uninitialized Memory</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="checked-uninit.html"><strong aria-hidden="true">5.1.</strong> Checked</a></li><li class="chapter-item expanded "><a href="drop-flags.html"><strong aria-hidden="true">5.2.</strong> Drop Flags</a></li><li class="chapter-item expanded "><a href="unchecked-uninit.html"><strong aria-hidden="true">5.3.</strong> Unchecked</a></li></ol></li><li class="chapter-item expanded "><a href="obrm.html"><strong aria-hidden="true">6.</strong> 所有権に基づいたリソース管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="constructors.html"><strong aria-hidden="true">6.1.</strong> Constructors</a></li><li class="chapter-item expanded "><a href="destructors.html"><strong aria-hidden="true">6.2.</strong> Destructors</a></li><li class="chapter-item expanded "><a href="leaking.html"><strong aria-hidden="true">6.3.</strong> Leaking</a></li></ol></li><li class="chapter-item expanded "><a href="unwinding.html"><strong aria-hidden="true">7.</strong> Unwinding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exception-safety.html"><strong aria-hidden="true">7.1.</strong> 例外安全性</a></li><li class="chapter-item expanded "><a href="poisoning.html"><strong aria-hidden="true">7.2.</strong> Poisoning</a></li></ol></li><li class="chapter-item expanded "><a href="concurrency.html"><strong aria-hidden="true">8.</strong> Concurrency</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="races.html"><strong aria-hidden="true">8.1.</strong> Races</a></li><li class="chapter-item expanded "><a href="send-and-sync.html"><strong aria-hidden="true">8.2.</strong> Send and Sync</a></li><li class="chapter-item expanded "><a href="atomics.html"><strong aria-hidden="true">8.3.</strong> Atomics</a></li></ol></li><li class="chapter-item expanded "><a href="vec.html"><strong aria-hidden="true">9.</strong> Implementing Vec</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="vec-layout.html"><strong aria-hidden="true">9.1.</strong> Layout</a></li><li class="chapter-item expanded "><a href="vec-alloc.html"><strong aria-hidden="true">9.2.</strong> Allocating</a></li><li class="chapter-item expanded "><a href="vec-push-pop.html"><strong aria-hidden="true">9.3.</strong> Push and Pop</a></li><li class="chapter-item expanded "><a href="vec-dealloc.html"><strong aria-hidden="true">9.4.</strong> Deallocating</a></li><li class="chapter-item expanded "><a href="vec-deref.html"><strong aria-hidden="true">9.5.</strong> Deref</a></li><li class="chapter-item expanded "><a href="vec-insert-remove.html"><strong aria-hidden="true">9.6.</strong> Insert and Remove</a></li><li class="chapter-item expanded "><a href="vec-into-iter.html"><strong aria-hidden="true">9.7.</strong> IntoIter</a></li><li class="chapter-item expanded "><a href="vec-raw.html"><strong aria-hidden="true">9.8.</strong> RawVec</a></li><li class="chapter-item expanded "><a href="vec-drain.html"><strong aria-hidden="true">9.9.</strong> Drain</a></li><li class="chapter-item expanded "><a href="vec-zsts.html"><strong aria-hidden="true">9.10.</strong> Handling Zero-Sized Types</a></li><li class="chapter-item expanded "><a href="vec-final.html"><strong aria-hidden="true">9.11.</strong> Final Code</a></li></ol></li><li class="chapter-item expanded "><a href="arc-and-mutex.html"><strong aria-hidden="true">10.</strong> Implementing Arc and Mutex</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+# Working with Unsafe
+-->
+<h1><a class="header" href="#unsafe-と連携する" id="unsafe-と連携する">Unsafe と連携する</a></h1>
+<!--
+Rust generally only gives us the tools to talk about Unsafe Rust in a scoped and
+binary manner. Unfortunately, reality is significantly more complicated than
+that. For instance, consider the following toy function:
+-->
+<p>たいていの場合、アンセーフな Rust を扱うツールは、限定された状況やバイナリでしか使えないようになっています。
+残念なことに、現実はそれよりも極めて複雑です。例えば、以下の簡単な関数を見てみましょう。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
+    if idx &lt; arr.len() {
+        unsafe {
+            Some(*arr.get_unchecked(idx))
+        }
+    } else {
+        None
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+Clearly, this function is safe. We check that the index is in bounds, and if it
+is, index into the array in an unchecked manner. But even in such a trivial
+function, the scope of the unsafe block is questionable. Consider changing the
+`<` to a `<=`:
+-->
+<p>この関数は明らかに安全です。インデックスが範囲内である事をチェックし、
+範囲内であれば未チェックで配列をインデックス参照します。
+しかしこのような自明な関数でさえも、unsafe ブロックのスコープには疑問が残ります。
+<code>&lt;</code> を <code>&lt;=</code> に変えてみましょう。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
+    if idx &lt;= arr.len() {
+        unsafe {
+            Some(*arr.get_unchecked(idx))
+        }
+    } else {
+        None
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+This program is now unsound, and yet *we only modified safe code*. This is the
+fundamental problem of safety: it's non-local. The soundness of our unsafe
+operations necessarily depends on the state established by otherwise
+"safe" operations.
+-->
+<p><em>安全なコードを変更しただけなのに</em>、今やこのプログラムは安全ではなくなりました。
+これが安全性の本質的な問題です。局所的ではないのです。
+アンセーフな操作の健全性は、通常 &quot;安全&quot; な操作によって構築された状態に依存しているのです。</p>
+<!--
+Safety is modular in the sense that opting into unsafety doesn't require you
+to consider arbitrary other kinds of badness. For instance, doing an unchecked
+index into a slice doesn't mean you suddenly need to worry about the slice being
+null or containing uninitialized memory. Nothing fundamentally changes. However
+safety *isn't* modular in the sense that programs are inherently stateful and
+your unsafe operations may depend on arbitrary other state.
+-->
+<p>安全性は、アンセーフな操作をしたからといってあらゆる他の悪い事を考慮する必要はない、という意味ではモジュール化されています。
+例えば、スライスに対して未チェックのインデックスアクセスをしても、スライスがヌルだったらどうしようとか、
+スライスが未初期化のメモリを含んでいるかもといった心配をする必要はありません。基本的には何も変わりません。
+しかし、プログラムは本質的にステートフルであり、アンセーフな操作はその他の任意の状態に依存しているかもしれない、
+という意味で、安全性はモジュール化<em>されてはいない</em>のです。</p>
+<!--
+Trickier than that is when we get into actual statefulness. Consider a simple
+implementation of `Vec`:
+-->
+<p>実際にステートフルな状況を考えると、事態はもっと厄介になります。
+<code>Vec</code> の簡単な実装を見てみましょう。</p>
+<pre><pre class="playpen"><code class="language-rust">use std::ptr;
+
+// この定義は不完全であることに注意してください。Vec の実装に関するセクションをみてください。
+pub struct Vec&lt;T&gt; {
+    ptr: *mut T,
+    len: usize,
+    cap: usize,
+}
+
+// この実装ではサイズが 0 の型を正しく扱えないことに注意してください。
+// ここでは、すべてが 0 以上の固定サイズの型しか存在しない素敵な仮想的な世界を仮定します。
+impl&lt;T&gt; Vec&lt;T&gt; {
+    pub fn push(&amp;mut self, elem: T) {
+        if self.len == self.cap {
+            // この例では重要ではありません。
+            self.reallocate();
+        }
+        unsafe {
+            ptr::write(self.ptr.offset(self.len as isize), elem);
+            self.len += 1;
+        }
+    }
+
+<span class="boring">    fn reallocate(&amp;mut self) { }
+</span>}
+
+<span class="boring">fn main() {}
+</span></code></pre></pre>
+<!--
+This code is simple enough to reasonably audit and verify. Now consider
+adding the following method:
+-->
+<p>このコードはとてもシンプルなので、それなりに監査して検証できるでしょう。
+それでは次のメソッドを追加してみましょう。</p>
+<pre><code class="language-rust ignore">fn make_room(&amp;mut self) {
+    // キャパシティを大きくする
+    self.cap += 1;
+}
+</code></pre>
+<!--
+This code is 100% Safe Rust but it is also completely unsound. Changing the
+capacity violates the invariants of Vec (that `cap` reflects the allocated space
+in the Vec). This is not something the rest of Vec can guard against. It *has*
+to trust the capacity field because there's no way to verify it.
+-->
+<p>このコードは 100% 安全な Rust ですが、同時に完全に不健全です。
+キャパシティの変更は、Vec の普遍条件（<code>cap</code> は Vec にアロケートされたスペースを表している）を破ることになります。
+Vec の他のコードはこれを防げません。
+Vec は <code>cap</code> フィールドを検証できないので、<em>信頼しなくてはならない</em> のです。</p>
+<!--
+`unsafe` does more than pollute a whole function: it pollutes a whole *module*.
+Generally, the only bullet-proof way to limit the scope of unsafe code is at the
+module boundary with privacy.
+-->
+<p><code>unsafe</code> は関数そのものを汚染するだけでなく、<em>モジュール</em> 全体を汚染します。
+一般的に、アンセーフなコードのスコープを制限する唯一で完全無欠の方法は、モジュール境界での非公開性を利用することです。</p>
+<!--
+However this works *perfectly*. The existence of `make_room` is *not* a
+problem for the soundness of Vec because we didn't mark it as public. Only the
+module that defines this function can call it. Also, `make_room` directly
+accesses the private fields of Vec, so it can only be written in the same module
+as Vec.
+-->
+<p>しかしこれは <em>完璧な</em> やり方です。
+<code>make_room</code> は、public メソッドではないので、Vec の健全性の問題にはなりません。
+この関数を定義しているモジュールだけがこの関数を呼べるのです。
+また、<code>make_room</code> は Vec の private フィールドを直接アクセスしているので、
+Vec と同じモジュールでのみ定義できます。</p>
+<!--
+It is therefore possible for us to write a completely safe abstraction that
+relies on complex invariants. This is *critical* to the relationship between
+Safe Rust and Unsafe Rust. We have already seen that Unsafe code must trust
+*some* Safe code, but can't trust *generic* Safe code. It can't trust an
+arbitrary implementor of a trait or any function that was passed to it to be
+well-behaved in a way that safe code doesn't care about.
+-->
+<p>このように、複雑な普遍条件に依存した安全な抽象化を提供することは可能なのです。
+これは安全な Rust とアンセーフな Rust の関係において<em>決定的に</em>重要です。
+すでに見たように、アンセーフなコードは <em>特定</em> の安全なコードを信頼しなくてはなりませんが、
+安全なコード <em>一般</em> を信頼することはできません。
+安全なコードを書くときには気にする必要はないのですが、アンセーフなコードでは、
+トレイトの任意の実装や渡された任意の関数が行儀よく振る舞うことを期待することはできないのです。</p>
+<!--
+However if unsafe code couldn't prevent client safe code from messing with its
+state in arbitrary ways, safety would be a lost cause. Thankfully, it *can*
+prevent arbitrary code from messing with critical state due to privacy.
+-->
+<p>しかし、安全なコードが状態をあらゆる方法でぐちゃぐちゃにすることを、アンセーフなコードが防げないのだとしたら、
+安全性とは絵に描いた餅かもしれません。
+ありがたいことに、非公開性を利用することで、
+任意のコードが重要な状態をめちゃくちゃにしないよう防ぐことが<em>できる</em>のです。</p>
+<!--
+Safety lives!
+-->
+<p>安全性は無事です!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="safe-unsafe-meaning.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="data.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="safe-unsafe-meaning.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="data.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
