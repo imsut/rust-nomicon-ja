@@ -30,6 +30,7 @@ jobs:
 
     - name: Git Commit docs
       run: |
+        echo "github.actor ${{ github.actor }}"
         echo git push origin ${{ github.head_ref }}
 
         committer=$(git show -s --format='%ae')
