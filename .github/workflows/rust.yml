@@ -30,10 +30,12 @@ jobs:
 
     - name: Git Commit docs
       run: |
-        echo "github.actor ${{ github.actor }}"
-        echo git push origin ${{ github.head_ref }}
-
+        ref=${GITHUB_REF#refs/heads/}
         committer=$(git show -s --format='%ae')
+
+        echo "github.actor ${{ github.actor }}"
+        echo "git push origin $ref"
+
 
         # This prevents this workflow from being triggered by this workflow itself.
         if [ $committer != "rust-lang-ja.nomicon-admin@users.noreply.github.com" ]; then
