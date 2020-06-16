@@ -1,8 +1,7 @@
 name: Rust
 
 on:
-  push:
-    branches: [ master ]
+  pull_request
 
 env:
   CARGO_TERM_COLOR: always
@@ -21,20 +20,23 @@ jobs:
     - name: rust-mdbook
       uses: ryankurte/action-mdbook@0.1.1
 
+    # `ryankurte/action-mdbook@0.1.1` doesn't seem to respect
+    # the argument `outputDir` which would specify the output directory.
+    # Thus, explicitly rename here.
     - name: Rename
       run: |
         rm -rf docs
         mv book docs
-    
+
     - name: Git Commit docs
       run: |
+        echo git push origin ${{ github.head_ref }}
+
         committer=$(git show -s --format='%ae')
         if [ $committer != "rust-lang-ja.nomicon-admin@users.noreply.github.com" ]; then
           git config --global user.name 'Document updater'
           git config --global user.email 'rust-lang-ja.nomicon-admin@users.noreply.github.com'
           git add docs
           git commit -m "Automated docs update"
-          git fetch
-          git merge origin/master
-          git push origin master
+          git push origin ${{ github.head_ref }}
         fi
