@@ -37,5 +37,7 @@ jobs:
           git config --global user.name 'Document updater'
           git config --global user.email 'rust-lang-ja.nomicon-admin@users.noreply.github.com'
           git add docs
-          git commit -m "Automated docs update" && git push origin ${{ github.head_ref }} || /bin/true
+          if git commit -m "Automated docs update"; then
+            git push origin HEAD:${{ github.head_ref }}
+          fi
         fi
