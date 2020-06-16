@@ -1,7 +1,8 @@
-name: Rust
+name: mdbook updater
 
 on:
-  pull_request
+  push:
+    - '!master'
 
 env:
   CARGO_TERM_COLOR: always
@@ -34,6 +35,8 @@ jobs:
         echo git push origin ${{ github.head_ref }}
 
         committer=$(git show -s --format='%ae')
+
+        # This prevents this workflow from being triggered by this workflow itself.
         if [ $committer != "rust-lang-ja.nomicon-admin@users.noreply.github.com" ]; then
           git config --global user.name 'Document updater'
           git config --global user.email 'rust-lang-ja.nomicon-admin@users.noreply.github.com'
