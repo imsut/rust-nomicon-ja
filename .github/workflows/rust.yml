@@ -45,6 +45,6 @@ jobs:
           if git commit -m "Automated docs update"; then
             git fetch
             git merge origin/master
-            git push origin HEAD:${{ github.head_ref }}
+            git push origin HEAD:$ref
           fi
         fi
